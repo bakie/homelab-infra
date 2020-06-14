@@ -28,3 +28,12 @@ module "_satan_kvm_guest" {
   memory            = 2048
   ipv4_address      = "10.1.1.101"
 }
+
+module "_lucifer_kvm_guest" {
+  source            = "./modules/kvm_guest"
+  base_os_volume_id = libvirt_volume.ubuntu_base.id
+  hostname          = "lucifer"
+  volume_size       = 20
+  memory            = 2048
+  ipv4_address      = "10.1.1.102"
+}
