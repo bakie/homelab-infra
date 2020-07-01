@@ -11,6 +11,15 @@ resource "libvirt_volume" "ubuntu_base" {
   pool   = libvirt_pool.pool.name
 }
 
+module "_pihole_kvm_guest" {
+  source            = "./modules/kvm_guest"
+  base_os_volume_id = libvirt_volume.ubuntu_base.id
+  hostname          = "pihole"
+  volume_size       = 10
+  memory            = 512
+  ipv4_address      = "10.1.1.99"
+}
+
 module "_prometheus_kvm_guest" {
   source            = "./modules/kvm_guest"
   base_os_volume_id = libvirt_volume.ubuntu_base.id
