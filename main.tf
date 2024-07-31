@@ -79,3 +79,25 @@ module "_home_assistant_guest" {
   memory            = 2048
   ipv4_address      = "10.1.1.103"
 }
+
+resource "libvirt_pool" "debian_pool" {
+  name = "debian_bookworm_base"
+  type = "dir"
+  path = "/opt/kvm/pools/debian_bookworm_base"
+}
+
+resource "libvirt_volume" "debian_base" {
+  name   = "debian_bookworm"
+  source = "https://cloud.debian.org/images/cloud/bookworm/20240717-1811/debian-12-generic-amd64-20240717-1811.qcow2"
+  format = "qcow2"
+  pool   = libvirt_pool.debian_pool.name
+}
+
+module "_merovingian_kvm_guest" {
+  source            = "./modules/kvm_guest"
+  base_os_volume_id = libvirt_volume.debian_base.id
+  hostname          = "merovingian"
+  volume_size       = 10
+  memory            = 512
+  ipv4_address      = "10.1.1.111"
+}
