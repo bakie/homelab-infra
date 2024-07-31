@@ -27,3 +27,9 @@ variable "ipv4_address" {
   type        = string
   description = "The ipv4 address that needs to be configured for this guest"
 }
+
+variable "firmware" {
+  type        = string
+  default     = ""
+  description = "The Firmware to use (if specified)"
+}

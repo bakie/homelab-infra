@@ -40,6 +40,7 @@ resource "libvirt_domain" "domain" {
   cloudinit = libvirt_cloudinit_disk.cloudinit_data.id
   #cloudinit = templatefile("${path.module}/templates/cloud_init.cfg.tpl", {})
   autostart = true
+  firmware = var.firmware
 
   disk {
     volume_id = libvirt_volume.volume.id
