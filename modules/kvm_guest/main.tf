@@ -1,7 +1,18 @@
+terraform {
+  required_providers {
+    libvirt = {
+      source  = "dmacvicar/libvirt"
+      version = "0.8.1"
+    }
+  }
+}
+
 resource "libvirt_pool" "pool" {
   name = var.hostname
   type = "dir"
-  path = "/opt/kvm/pools/${var.hostname}"
+  target {
+    path = "/opt/kvm/pools/${var.hostname}"
+  }
 }
 
 resource "libvirt_volume" "volume" {
@@ -9,6 +20,11 @@ resource "libvirt_volume" "volume" {
   pool           = libvirt_pool.pool.name
   size           = var.volume_size * 1000000000
   base_volume_id = var.base_os_volume_id
+  lifecycle {
+    ignore_changes = [
+      size
+    ]
+  }
 }
 
 data "template_file" "user_data" {
@@ -38,9 +54,8 @@ resource "libvirt_domain" "domain" {
   memory    = var.memory
   vcpu      = var.vcpus
   cloudinit = libvirt_cloudinit_disk.cloudinit_data.id
-  #cloudinit = templatefile("${path.module}/templates/cloud_init.cfg.tpl", {})
   autostart = true
-  firmware = var.firmware
+  firmware  = var.firmware
 
   disk {
     volume_id = libvirt_volume.volume.id

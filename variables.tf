@@ -1,9 +1,9 @@
-variable "kvm_user" {
+variable "kvm_construct01_user" {
   type    = string
   default = "ikke"
 }
 
-variable "kvm_hostname" {
-  type = string
-  default = "10.1.1.253"
+variable "kvm_construct01_hostname" {
+  type    = string
+  default = "10.1.1.200"
 }
