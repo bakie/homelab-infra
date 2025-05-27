@@ -113,7 +113,7 @@ $ apt install cockpit cockpit-machines --no-install-recommends
 
 Enable and start cockpit
 ```
-$ systemctl enabled cockpit.socket
+$ systemctl enable cockpit.socket
 $ systemctl start cockpit.socket
 ```
 

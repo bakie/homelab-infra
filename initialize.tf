@@ -11,3 +11,8 @@ provider "libvirt" {
   uri   = "qemu+ssh://${var.kvm_construct01_user}@${var.kvm_construct01_hostname}/system?known_hosts_verify=ignore"
   alias = "construct01"
 }
+
+provider "libvirt" {
+  uri   = "qemu+ssh://${var.kvm_construct02_user}@${var.kvm_construct02_hostname}/system?known_hosts_verify=ignore"
+  alias = "construct02"
+}
