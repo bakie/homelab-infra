@@ -1,15 +1,15 @@
 # Homelab Infra
 
-This is my simple homelab infra setup using [KVM](https://www.linux-kvm.org/page/Main_Page) and managing the VM's via [Terraform](https://www.terraform.io/).
+This is my simple homelab infra setup using [KVM](https://www.linux-kvm.org/page/Main_Page) and managing the VM's via [OpenTofu](https://opentofu.org/).
 
 # Table of content
 * [Requirements](#requirements)
 * [Installing KVM on Debian 12 bookworm](#installing-kvm-on-debian-12-bookworm)
-* [Running Terraform](#running-terraform)
+* [Running OpenTofu](#running-opentofu)
 
 ## Requirements
 * A machine running [KVM](https://www.linux-kvm.org/page/Main_Page)
-* [Terraform](https://www.terraform.io/)
+* [OpenTofu](https://opentofu.org/)
 
 ## Installing KVM on Debian 12 bookworm
 ## Prerequisites
@@ -129,13 +129,13 @@ $ usermod -aG kvm ikke
 $ reboot
 ```
 
-## Running Terraform
-When using it for the first time, first initialize terraform. This will download the required files for the libvirt provider.
+## Running OpenTofu
+When using it for the first time, first initialize OpenTofu. This will download the required files for the libvirt provider.
 ```
-$ terraform init
+$ tofu init
 ```
 
-Run terraform apply to apply the changes to KVM
+Run tofu apply to apply the changes to KVM
 ```
-$ terraform apply
+$ tofu apply
 ```
